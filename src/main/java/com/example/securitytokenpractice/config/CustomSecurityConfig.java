@@ -2,6 +2,7 @@ package com.example.securitytokenpractice.config;
 
 import com.example.securitytokenpractice.security.APIUserDetailsService;
 import com.example.securitytokenpractice.security.filter.APILoginFilter;
+import com.example.securitytokenpractice.security.handler.APILoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -61,6 +62,9 @@ public class CustomSecurityConfig {
         //APILogInFilter
         APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
         apiLoginFilter.setAuthenticationManager(authenticationManager);
+
+        APILoginSuccessHandler successHandler = new APILoginSuccessHandler();
+        apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
