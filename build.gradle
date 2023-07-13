@@ -40,6 +40,9 @@ dependencies {
 
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+    // 가장 많이 사용되는 버젼
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 tasks.named('test') {
