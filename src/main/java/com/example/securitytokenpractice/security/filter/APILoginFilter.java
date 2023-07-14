@@ -29,7 +29,7 @@ public class APILoginFilter extends AbstractAuthenticationProcessingFilter {
 
         if(request.getMethod().equalsIgnoreCase("GET")){
             log.info("GET METHOD NOT SUPPORT");
-            return null;
+             return null;
         }
 
         log.info("-----------------------------------------");
