@@ -2,6 +2,7 @@ package com.example.securitytokenpractice.config;
 
 import com.example.securitytokenpractice.security.APIUserDetailsService;
 import com.example.securitytokenpractice.security.filter.APILoginFilter;
+import com.example.securitytokenpractice.security.filter.TokenCheckFilter;
 import com.example.securitytokenpractice.security.handler.APILoginSuccessHandler;
 import com.example.securitytokenpractice.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -70,11 +71,23 @@ public class CustomSecurityConfig {
 
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
+        // api로 시작하는 모든 경로는 TokenCheckFilter 동작
+
+        http.addFilterBefore(
+            tokenCheckFilter(jwtUtil),
+                UsernamePasswordAuthenticationFilter.class
+        );
+
+
 
         http.csrf().disable(); // CSRF 토큰 비활성화
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션을 사용하지 않음
 
         return http.build();
+    }
+
+    private TokenCheckFilter tokenCheckFilter(JWTUtil jwtUtil){
+        return new TokenCheckFilter(jwtUtil);
     }
 
 }
