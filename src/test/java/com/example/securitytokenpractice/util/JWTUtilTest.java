@@ -36,5 +36,25 @@ class JWTUtilTest {
     }
 
 
+    @Test
+    public void testAll(){
+
+        String jwtStr = jwtUtil.generateToken(Map.of("mid", "AAA", "email", "aaaa@bbb.com"), 1);
+        // 키 밸류 형식으로 값을 할당, int days = 1 으로 준다.
+
+        System.out.println(jwtStr);
+
+        Map<String, Object> claim = jwtUtil.validateToken(jwtStr);
+        System.out.println("MID : " + claim.get("mid"));
+        System.out.println("EMAIL : " + claim.get("email"));
+
+
+    }
+
+
+
+
+
+
 
 }

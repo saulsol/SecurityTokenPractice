@@ -36,7 +36,7 @@ public class JWTUtil {
 
 
         // 테스트 시에는 짧은 유효시간
-        int time = (1) * days; // 일단 간단하게 만들었다
+        int time = (60 * 24) * days; //테스트는 분단위로 나중에 60*24 (일)단위로 변경
 
         String jwtStr = Jwts.builder()
                 .setHeader(headers)
