@@ -2,6 +2,7 @@ package com.example.securitytokenpractice.config;
 
 import com.example.securitytokenpractice.security.APIUserDetailsService;
 import com.example.securitytokenpractice.security.filter.APILoginFilter;
+import com.example.securitytokenpractice.security.filter.RefreshTokenFilter;
 import com.example.securitytokenpractice.security.filter.TokenCheckFilter;
 import com.example.securitytokenpractice.security.handler.APILoginSuccessHandler;
 import com.example.securitytokenpractice.util.JWTUtil;
@@ -78,6 +79,8 @@ public class CustomSecurityConfig {
                 UsernamePasswordAuthenticationFilter.class
         );
 
+        // refreshToken 호출 처리
+        http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil), TokenCheckFilter.class);
 
 
         http.csrf().disable(); // CSRF 토큰 비활성화
